@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 const bodyParser = require('body-parser');
+const { default: axios } = require("axios");
 
 app.use(bodyParser.json());
 const port = process.env.PORT || 3001;
@@ -10,6 +11,21 @@ app.get("/", (req, res) => res.type('html').send(html));
 app.post("/register", async (req, res) => {
   const { full_name, email, phone_number } = req.body
   console.log(full_name, email, phone_number)
+
+  try {
+    const response = await axios.post( "https://hooks.zapier.com/hooks/catch/14481677/32e7vq8/", {
+      body: {
+        contact: {
+          full_name,
+          email,
+          phone_number
+        }
+      }
+    })
+    console.log({response})
+  }catch(e){
+    console.log(e)
+  }
 
   res.sendStatus(200)
 } )
