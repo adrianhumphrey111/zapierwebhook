@@ -1,10 +1,19 @@
 const express = require("express");
 const app = express();
 const bodyParser = require('body-parser');
+const helmet = require('helmet');
+
 const { default: axios } = require("axios");
 
 app.use(bodyParser.json());
+app.use(helmet());
 const port = process.env.PORT || 3001;
+
+// Disable strict-origin-when-cross-origin by setting Referrer-Policy to "no-referrer"
+app.use((req, res, next) => {
+  res.setHeader('Referrer-Policy', 'no-referrer');
+  next();
+});
 
 app.get("/", (req, res) => res.type('html').send(html));
 
