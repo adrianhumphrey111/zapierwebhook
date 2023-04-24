@@ -4,6 +4,13 @@ const port = process.env.PORT || 3001;
 
 app.get("/", (req, res) => res.type('html').send(html));
 
+app.post("/register", async (req, res) => {
+  const { full_name, email, phone_number } = req.body
+  console.log(full_name, email, phone_number)
+
+  res.sendStatus(200)
+} )
+
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
 
 
