@@ -2,12 +2,31 @@ const express = require("express");
 const app = express();
 const bodyParser = require('body-parser');
 const helmet = require('helmet');
-
+const port = process.env.PORT || 3001;
 const { default: axios } = require("axios");
+const cors = require('cors');
+
+const allowedOrigins = [
+  'http://localhost:3000',
+  'https://maysfinests.myclickfunnels.com'
+];
+
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  }
+};
+
+
 
 app.use(bodyParser.json());
-app.use(helmet());
-const port = process.env.PORT || 3001;
+// Enable CORS with the allowed origins
+app.use(cors(corsOptions));
+
 
 // Disable strict-origin-when-cross-origin by setting Referrer-Policy to "no-referrer"
 app.use((req, res, next) => {
