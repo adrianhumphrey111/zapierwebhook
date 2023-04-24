@@ -8,7 +8,8 @@ const cors = require('cors');
 
 const allowedOrigins = [
   'http://localhost:3000',
-  'https://maysfinests.myclickfunnels.com'
+  'https://maysfinests.myclickfunnels.com/in-video-conversion?preview=true',
+  'https://maysfinests.myclickfunnels.com/in-video-conversion'
 ];
 
 const corsOptions = {
