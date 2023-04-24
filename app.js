@@ -28,12 +28,6 @@ app.use(bodyParser.json());
 app.use(cors(corsOptions));
 
 
-// Disable strict-origin-when-cross-origin by setting Referrer-Policy to "no-referrer"
-app.use((req, res, next) => {
-  res.setHeader('Referrer-Policy', 'no-referrer');
-  next();
-});
-
 app.get("/", (req, res) => res.type('html').send(html));
 
 app.post("/register", async (req, res) => {
