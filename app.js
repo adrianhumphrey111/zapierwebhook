@@ -14,13 +14,13 @@ app.post("/register", async (req, res) => {
 
   try {
     const response = await axios.post( "https://hooks.zapier.com/hooks/catch/14481677/32e7vq8/", {
-      body: {
+
         contact: {
           full_name,
           email,
           phone_number
         }
-      }
+      
     })
     console.log({response})
   }catch(e){
